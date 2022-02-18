@@ -3,54 +3,51 @@ import "./style.css";
 
 const Header = () => {
     return (
-        <header class="main-header">
-            <Link class="logo-holder" to="/">
-                <img src="./images/header/logo.png" alt="" />
-            </Link>
-            {/* nav-button-wrap */}
-            <div class="nav-button but-hol">
-                <span class="nos"></span>
-                <span class="ncs"></span>
-                <span class="nbs"></span>
-                <div class="menu-button-text">Menu</div>
-            </div>
-            {/* nav-button-wrap end */}
-            <div class="header-social">
-                <ul>
-                    <li>
-                        <Link to="/">
-                            <i class="fab fa-linkedin"></i>
+        <header className="main-header">
+            <div className="container">
+                <div className="grid-2-spaceBetween-noGutter">
+                    <div className="col-2_md-6">
+                        <div className="logo">
+                        <Link className="logo-holder" to="/">
+                            <img src="./images/header/logo.png" alt="" />
                         </Link>
-                        {/* <a href="https://www.linkedin.com/in/raul-delianu-00b292165/" target="_blank">
-                            <i class="fab fa-linkedin"></i>
-                        </a> */}
-                    </li>
+                        </div>
+                    </div>
 
-                    <li>
-                        <a href="https://github.com/DRDeveloppeur" target="_blank">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </li>
+                    <div className="col-10_md-6">
+                        <nav>
+                            <Link className="hover-border-colors" to="/">
+                                Portfolio
+                            </Link>
 
-                    <li>
-                        <a href="https://twitter.com/Delianu1" target="_blank">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="https://www.facebook.com/raul.delianu" target="_blank">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                    </li>
-                </ul>
+                            <Link className="hover-border-colors" to="/">
+                                Portfolio
+                            </Link>
+                            
+                            <Link className="hover-border-colors" to="/">
+                                Portfolio
+                            </Link>
+                            
+                            <Link className="hover-border-colors" to="/">
+                                Portfolio
+                            </Link>
+                        </nav>
+                    </div>
+                </div>
             </div>
-            {/* showshare */}
-            <div class="show-share showshare">
-                <i class="fal fa-retweet"></i>
-                <span>Share This</span>
-            </div>
-            {/* showshare end */}
+            
+            {/* <a href="https://www.linkedin.com/in/raul-delianu-00b292165/" target="_blank">
+                <i className="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/DRDeveloppeur" target="_blank">
+                <i className="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com/Delianu1" target="_blank">
+                <i className="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/raul.delianu" target="_blank">
+                <i className="fab fa-facebook-f"></i>
+            </a> */}
         </header>
     );
 }

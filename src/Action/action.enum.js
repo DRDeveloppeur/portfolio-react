@@ -1,0 +1,14 @@
+const ActionsType = {
+    ADD_TODO: "ADD",
+    ADD_LOG: "ADD_LOG",
+    DELETE_TODO: "DELETE",
+    UPDATE_TODO: "UPDATE",
+    CHECKED_TODO: "CHECKED",
+    EDIT_MODE_TODO: "EDIT_MODE",
+    CONFIRM_UPDATE_TODO: "CONFIRM_UPDATE",
+    CANCEL_UPDATE_TODO: "CANCEL_UPDATE",
+    LOAD_TODO: "LOAD_TODO",
+    LOADING: "LOADING",
+}
+
+export default ActionsType;
