@@ -1,0 +1,30 @@
+.auth .auth-btn {
+  position: fixed;
+  left: 0;
+  top: 30%;
+  border-radius: 6px 0 0 6px;
+  background: linear-gradient(145deg, #1e2024, #23272b);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all ease-in-out 0.4s;
+  z-index: 2;
+  font-size: 14px;
+  border: 0 none;
+  padding: 10px 0px 8px;
+  font-weight: 400;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auth .auth-btn span i,
+.auth .auth-btn span svg {
+  font-size: 18px;
+  color: #c4cfde;
+}
+.auth .auth-btn:hover span i,
+.auth .auth-btn:hover span svg {
+  color: #fff;
+  filter: drop-shadow(0 0 0.5rem #fff);
+}

@@ -1,6 +1,56 @@
+.home {
+  position: relative;
+}
 .home .present-me .item-card {
   padding: 35px;
   background: #212428;
   box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
   border-radius: 10px 10px 0 0;
+  color: #c4cfde;
+  margin-bottom: 40px;
+}
+.home .present-me .item-card a + a {
+  margin-left: 60px;
+}
+.home .present-me .item-card .CV img {
+  border-radius: 10px;
+}
+.home .present-me .item-card .user-present {
+  color: red;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 0 0.5rem red);
+  padding: 15px;
+  margin: 0;
+  margin-bottom: 15px;
+  border: 2px solid red;
+}
+.home .present-me .item-card .user-present::before {
+  content: "";
+  width: 30px;
+  height: 30px;
+}
+.home .present-me .item-card .info {
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+}
+.home .present-me .item-card .info i,
+.home .present-me .item-card .info svg {
+  filter: drop-shadow(0 0 0.5rem red);
+  color: red;
+  font-size: 18px;
+  margin-right: 15px;
+}
+.home .present-me .item-card h2 {
+  color: #fff;
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 62px;
+  margin-bottom: 11px;
+  font-family: 'Tangerine', cursive;
+}
+.home .present-me .item-card h2 span {
+  color: red;
 }

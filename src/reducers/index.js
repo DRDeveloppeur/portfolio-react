@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import todoReducer from './todoReducer';
-import logReducer from './logReducer';
+import projectsReducer from './projectsReducer';
+import authReducer from './authReducer';
 
 export default combineReducers({
-    todoReducer,
-    logReducer
+    projectsReducer,
+    authReducer
 })

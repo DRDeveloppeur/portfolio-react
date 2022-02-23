@@ -6,6 +6,7 @@ header {
   backdrop-filter: blur(8px);
   top: 0;
   margin-bottom: 60px;
+  z-index: 999;
 }
 header .container {
   max-width: 1400px;
@@ -37,6 +38,9 @@ header .logo .logo-holder::after {
   animation: animatedgradient 3s ease alternate infinite;
   background-size: 300% 300%;
 }
+header .logo .logo-holder:hover {
+  filter: none;
+}
 header .logo img {
   width: 70px;
   border-radius: 100%;
@@ -60,6 +64,7 @@ header nav a {
 header nav a:hover,
 header nav a.active {
   color: white;
+  filter: none;
 }
 .hover-border-colors {
   display: flex;

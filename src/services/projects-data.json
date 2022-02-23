@@ -1,0 +1,18 @@
+{
+    "projects": [
+        {
+            "name": "test",
+            "images": ["logo.png", "me.jpg"],
+            "description": "Description du projet",
+            "skills": ["PHP", "Html", "React", "Less"],
+            "isActive": false
+        },
+        {
+            "name": "test 2",
+            "images": ["logo.png", "me.jpg"],
+            "description": "Description du projet 2",
+            "skills": ["PHP", "Html", "React", "Less"],
+            "isActive": true
+        }
+    ]
+}

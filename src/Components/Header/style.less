@@ -9,6 +9,7 @@ header {
     backdrop-filter: blur(8px);
     top: 0;
     margin-bottom: 60px;
+    z-index: 999;
 
     .container {
         max-width: 1400px;
@@ -40,6 +41,9 @@ header {
                 animation: animatedgradient 3s ease alternate infinite;
                 background-size: 300% 300%;
             }
+            &:hover {
+                filter: none;
+            }
         }
         img {
             width: 70px;
@@ -62,9 +66,10 @@ header {
             flex-wrap: wrap;
             letter-spacing: 1px;
             font-family: @font-comics;
-
+            
             &:hover, &.active {
                 color: white;
+                filter: none;
             }
         }
     }

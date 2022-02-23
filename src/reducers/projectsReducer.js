@@ -5,7 +5,7 @@ let stateInit = {
     loading: false
 }
 
-const todoReducer = (state = stateInit, action = {}) => {
+const projectsReducer = (state = stateInit, action = {}) => {
     const {id, title} = action;
     let toDoList = [];
 
@@ -53,4 +53,4 @@ const todoReducer = (state = stateInit, action = {}) => {
     }
 }
 
-export default todoReducer;
+export default projectsReducer;

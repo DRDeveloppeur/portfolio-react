@@ -1,10 +1,70 @@
+@import "../../vars.less";
+
 .home {
+    position: relative;
+    
     .present-me {
         .item-card {
             padding: 35px;
             background: #212428;
             box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
             border-radius: 10px 10px 0 0;
+            color: @color-txt;
+            margin-bottom: 40px;
+
+            a + a {
+                margin-left: 60px;
+            }
+
+            .CV {
+
+                img {
+                    border-radius: 10px;
+                }
+            }
+            .user-present {
+                color: @color-primary;
+                border-radius: 100%;
+                width: 30px;
+                height: 30px;
+                filter: drop-shadow(0 0 0.5rem @color-primary);
+                padding: 15px;
+                margin: 0;
+                margin-bottom: 15px;
+                border: 2px solid @color-primary;
+                
+                &::before {
+                    content: "";
+                    width: 30px;
+                    height: 30px;
+                    // background-color: lighten();
+                }
+            }
+            .info {
+                line-height: 36px;
+                display: flex;
+                align-items: center;
+
+                i, svg {
+                    filter: drop-shadow(0 0 0.5rem @color-primary);
+                    color: @color-primary;
+                    font-size: 18px;
+                    margin-right: 15px; 
+                }
+            }
+            h2 {
+                color: @color-w;
+                font-weight: 700;
+                font-size: 52px;
+                line-height: 62px;
+                margin-bottom: 11px;
+                font-family: @font-tangerine;
+                
+                span {
+                    color: @color-primary;
+                }
+            }
         }
     }
+    
 }
