@@ -1,0 +1,46 @@
+.input-image .upload__image-wrapper .block-draggable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+  border: 2px dashed #c4cfde;
+  color: #c4cfde;
+  width: 100%;
+  height: 100px;
+  margin: 15px;
+  padding: 15px;
+  transition: all ease-in-out 0.2s;
+  text-transform: uppercase;
+}
+.input-image .upload__image-wrapper .block-draggable:hover {
+  border-color: #fff;
+  color: #fff;
+}
+.input-image .upload__image-wrapper .item-card {
+  position: relative;
+}
+.input-image .upload__image-wrapper .item-card .remove {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #c4cfde;
+  padding: 10px;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 15px;
+  height: 15px;
+}
+.input-image .upload__image-wrapper .item-card .remove:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: red;
+}
+.input-image .upload__image-wrapper .item-card .change {
+  cursor: pointer;
+  padding: 15px;
+  color: #c4cfde;
+  font-size: 22px;
+}
+.input-image .upload__image-wrapper .item-card .change:hover {
+  color: red;
+}

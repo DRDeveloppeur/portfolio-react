@@ -1,20 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from "@mui/material";
-import { getAuth, getRedirectResult, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth";
-import { forwardRef, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useDispatch } from "react-redux";
 import Login from "../../services/login-request.service";
 import "./style.css";
 
-const Auth = ({projects}) => {
+const Auth = () => {
     const provider = new GoogleAuthProvider();
     const gAuth = getAuth();
     const dispatch = useDispatch();
-    const { user } = useSelector(state => {
-        return {
-            user: state.authReducer.user,
-        }
-    })
 
     const loginWithGoogle = () => {
         signInWithPopup(gAuth, provider).then(result => dispatch(Login(result.user)) );
