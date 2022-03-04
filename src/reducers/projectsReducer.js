@@ -1,51 +1,53 @@
 import ActionsType from "../Action/action.enum";
 
 let stateInit = {
-    toDoList: [],
+    projects: [],
+    images: "",
     loading: false
 }
 
 const projectsReducer = (state = stateInit, action = {}) => {
     const {id, title} = action;
-    let toDoList = [];
+    let projects = [];
 
     switch (action.type) {
-        case ActionsType.ADD_TODO:
-            toDoList = [...state.toDoList, action.payload];
-            return {...state, toDoList};
-        case ActionsType.DELETE_TODO:
-            toDoList = state.toDoList.filter((toDo) => toDo.id !== id);
-            return {...state, toDoList: toDoList};
-        case ActionsType.UPDATE_TODO:
-            toDoList = state.toDoList.map((toDo) => {
-                return toDo.id === id ? {...toDo, title} : toDo;
-            });
-            return {...state, toDoList : toDoList};
-        case ActionsType.CONFIRM_UPDATE_TODO:
-            toDoList = state.toDoList.map((toDo) => {
-                return toDo.id === id ? {...toDo, isEditing : false} : toDo;
-            });
-            return {...state, toDoList : toDoList};
-        case ActionsType.CANCEL_UPDATE_TODO:
-            toDoList = state.toDoList.map((toDo) => {
-                return toDo.id === id ? {...toDo, isEditing : false, title} : toDo;
-            });
-            return {...state, toDoList : toDoList};
-        case ActionsType.EDIT_MODE_TODO:
-            toDoList = state.toDoList.map((toDo) => {
-                return toDo.id === id ? {...toDo, isEditing : true} : toDo;
-            });
-            return {...state, toDoList : toDoList};
-        case ActionsType.CHECKED_TODO:
-            toDoList = state.toDoList.map((toDo) => {
-                return toDo.id === id ? {...toDo, checked : !toDo.checked} : toDo;
-            })
-            return {...state, toDoList: toDoList};
-        case ActionsType.LOAD_TODO:
-            toDoList = action.payload.map((toDo) => {
-                return {...toDo};
-            })
-            return {...state, toDoList};
+        case ActionsType.ADD_NEW_PROJECT:
+            projects = [...state.projects, action.payload];
+            // return {...state.projects, projects: projects};
+            return {...state, projects: projects};
+        // case ActionsType.DELETE_TODO:
+        //     projects = state.projects.filter((toDo) => toDo.id !== id);
+        //     return {...state, projects: projects};
+        // case ActionsType.UPDATE_TODO:
+        //     projects = state.projects.map((toDo) => {
+        //         return toDo.id === id ? {...toDo, title} : toDo;
+        //     });
+        //     return {...state, projects : projects};
+        // case ActionsType.CONFIRM_UPDATE_TODO:
+        //     projects = state.projects.map((toDo) => {
+        //         return toDo.id === id ? {...toDo, isEditing : false} : toDo;
+        //     });
+        //     return {...state, projects : projects};
+        // case ActionsType.CANCEL_UPDATE_TODO:
+        //     projects = state.projects.map((toDo) => {
+        //         return toDo.id === id ? {...toDo, isEditing : false, title} : toDo;
+        //     });
+        //     return {...state, projects : projects};
+        // case ActionsType.EDIT_MODE_TODO:
+        //     projects = state.projects.map((toDo) => {
+        //         return toDo.id === id ? {...toDo, isEditing : true} : toDo;
+        //     });
+        //     return {...state, projects : projects};
+        // case ActionsType.CHECKED_TODO:
+        //     projects = state.projects.map((toDo) => {
+        //         return toDo.id === id ? {...toDo, checked : !toDo.checked} : toDo;
+        //     })
+        //     return {...state, projects: projects};
+        // case ActionsType.LOAD_TODO:
+        //     projects = action.payload.map((toDo) => {
+        //         return {...toDo};
+        //     })
+        //     return {...state, projects: projects};
         case ActionsType.LOADING:
             return {...state, loading: action.payload}
         default:

@@ -1,7 +1,9 @@
 import ActionsType from "./action.enum";
 
 export const auth = (data) => ({type: ActionsType.AUTH, user: data});
+export const imagesUploaded = (data) => ({type: ActionsType.LOAD_IMAGES, images: data});
 export const loading = (data) => ({type: ActionsType.LOADING, payload: data});
+export const addNewProject = (data) => ({type: ActionsType.ADD_NEW_PROJECT, project: data});
 
 // export const add = (data) => ({type: ActionsType.ADD_TODO, toDo: data});
 // export const addLog = (data) => ({type: ActionsType.ADD_LOG, log: data});

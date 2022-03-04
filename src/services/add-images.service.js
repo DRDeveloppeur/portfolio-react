@@ -1,17 +1,16 @@
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase } from "firebase/database";
+import { useDispatch } from "react-redux";
+import { imagesUploaded } from "../Action/actions";
 import app from './firebase-init.service';
 
-const addUserDB = (userId, name, email, imageUrl) => {
+const addImagesUploaded = (data) => {
     const db = getDatabase(app);
 
-    set(ref(db, 'users/' + userId), {
-        username: name,
-        email: email,
-        profile_picture : imageUrl
-    });
+    const dispatch = useDispatch;
+    dispatch(imagesUploaded(data));
 }
 
-export default addUserDB;
+export default addImagesUploaded;
 // import { loading, loadTodo } from "../Action/actions";
 // import postRequest from "./post-request.service";
 

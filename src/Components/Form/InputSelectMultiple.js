@@ -1,4 +1,4 @@
-import { FormControl, MenuItem, OutlinedInput, Select } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import { useTheme } from "@mui/system";
 import { useState } from "react";
 import "./style.css";
@@ -21,19 +21,20 @@ function getStyles(name, personName, theme) {
           ? theme.typography.fontWeightRegular
           : theme.typography.fontWeightMedium,
     };
-  }
+}
 
 const InputSelectMultiple = ({names = [], name, label, required = false}) => {
     const [value, setValue] = useState([]);
     const theme = useTheme();
+    
     const handleChange = (event) => {
-        const { target: { value } } = event;
-        setValue(typeof value === 'string' ? value.split(',') : value);
+        const { target: { value: val } } = event;
+        setValue(typeof val === 'string' ? val.split(', ') : val);
     };
 
     return (
         <FormControl sx={{ maxWidth: 250, m: 1, mt: 3 }} style={{width: "100%"}} variant="standard">
-            <Select multiple displayEmpty value={value} name={name} onChange={(e) => handleChange(e)} required={required} renderValue={(selected) => {if  (selected.length === 0) {return <em>Vide</em>;}return selected.join(', ');}} MenuProps={MenuProps} label={label}>
+            <Select multiple displayEmpty value={value} name={name} onChange={(e) => handleChange(e)} required={required} renderValue={(selected) => {if  (selected.length === 0) {return <em>Vide</em>;}return (selected.join(', '));}} MenuProps={MenuProps} label={label}>
                 <MenuItem disabled value=""><em>{label}</em></MenuItem>
 
                 {names.map((name, key) => (

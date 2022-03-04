@@ -6,7 +6,7 @@ let stateInit = {
     loading: false
 }
 
-const authReducer = (state = stateInit, action = {}) => {
+const addNewProjectReducer = (state = stateInit, action = {}) => {
     let user = [];
 
     switch (action.type) {
@@ -18,4 +18,4 @@ const authReducer = (state = stateInit, action = {}) => {
     }
 }
 
-export default authReducer;
+export default addNewProjectReducer;

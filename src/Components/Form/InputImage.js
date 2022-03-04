@@ -2,23 +2,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ImageList, ImageListItem, ImageListItemBar, ListSubheader } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import ReactImageUploading from "react-images-uploading";
+import ImageUploading from "react-images-uploading";
+import { useDispatch, useSelector } from "react-redux";
+import { imagesUploaded } from "../../Action/actions";
 import "./style.css";
 
 const InputImage = ({name,  required = false}) => {
     const [images, setImages] = useState([]);
     const maxNumber = 69;
+    const dispatch = useDispatch();
+    const { imagesUpload } = useSelector(state => {
+        return {
+            imagesUpload: state.imagesUploadedReducer.images,
+        }
+    })
 
     const onChange = (imageList, addUpdateIndex) => {
         // data for submit
         setImages(imageList);
-        console.log(images);
+        dispatch(imagesUploaded(imageList))
     };
     
 
     return (
         <div className="input-image">
-            <ReactImageUploading name={name} multiple value={images} inputProps={() => name} required={required} onChange={onChange} maxNumber={maxNumber} dataURLKey="data_url">
+            <ImageUploading name={name} multiple value={images} inputProps={{"name": name}} required={required} onChange={onChange} maxNumber={maxNumber} dataURLKey="data_url">
                 {({
                 imageList,
                 onImageUpload,
@@ -27,12 +35,22 @@ const InputImage = ({name,  required = false}) => {
                 onImageRemove,
                 isDragging,
                 dragProps,
+                errors,
                 }) => (
                 // write your building UI
                 <div className="upload__image-wrapper">
-                    <button className="block-draggable" style={isDragging ? { color: 'red' } : undefined} onClick={onImageUpload} {...dragProps}>
-                        Click or Drop here
+                    <button type="button" className="block-draggable" style={isDragging ? { color: 'red' } : undefined} onClick={onImageUpload} {...dragProps}>
+                        {isDragging ? "Click or Drop here" : "Upload space"}
                     </button>
+
+                    {
+                        errors && <div>
+                        {errors.maxNumber && <span>Number of selected images exceed maxNumber</span>}
+                        {errors.acceptType && <span>Your selected file type is not allow</span>}
+                        {errors.maxFileSize && <span>Selected file size exceed maxFileSize</span>}
+                        {errors.resolution && <span>Selected file is not match your desired resolution</span>}
+                        </div>
+                    }
 
                     <Box sx={{ overflowY: 'auto', margin: "15px" }}>
                         <ImageListItem key="Subheader" cols={2} style={{width: "100%", paddingBottom: "15px"}}>
@@ -55,10 +73,10 @@ const InputImage = ({name,  required = false}) => {
                         </ImageList>
                     </Box>
 
-                    <button className="remove-all btn" onClick={onImageRemoveAll}>Remove all images</button>
+                    <button type="button" className="remove-all btn" onClick={onImageRemoveAll}>Remove all images</button>
                 </div>
                 )}
-            </ReactImageUploading>
+            </ImageUploading>
         </div>
     );
 }

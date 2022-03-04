@@ -1,22 +1,9 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import addUserDB from "../../services/add-user-request.service";
-import getUsersDB from "../../services/get-users-request.service";
 import "./style.css";
 
 const Projet = ({projects}) => {
-    const dispatch = useDispatch();
-
-    const { auth } = useSelector(state => {
-        return {
-            auth: state.authReducer.user,
-        }
-    })
 
     useEffect(() => {
-        // addUserDB("user_01", "Raul", "raul3wa@gmail.com", "logo.png");
-        // dispatch(getUsersDB());
-        // console.log(auth);
 
     }, [])
     

@@ -14,16 +14,16 @@ const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="right" ref={ref} {...props} />;
 });
 const TransitionAdd = forwardRef(function Transition(props, ref) {
-    return <Slide direction="top" ref={ref} {...props} />;
+    return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const Admin = ({projects}) => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const [openAdd, setOpenAdd] = useState(false);
-    const { user } = useSelector(state => {
+    const { images } = useSelector(state => {
         return {
-            user: state.authReducer.user,
+            images: state.imagesUploadedReducer.images,
         }
     })
     const skills = ["PHP", "SQL", "HTML", "CSS"]
@@ -46,24 +46,20 @@ const Admin = ({projects}) => {
     const submitFormAddProduct = (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
-        const date = form.get("date");
-        console.log("date : "+date);
-        const name = form.get("name");
-        console.log("name : "+name);
-        const skills = form.get("skills");
-        console.log("skills : "+skills);
-        const client = form.get("client");
-        console.log("client : "+client);
-        const category = form.get("category");
-        console.log("category : "+category);
-        const github = form.get("github");
-        console.log("github : "+github);
-        const site = form.get("site");
-        console.log("site : "+site);
-        const images = form.get("images");
-        console.log("images : "+images);
-        const description = form.get("description");
-        console.log("description : "+description);
+
+        const newProject = {
+            "date": form.get("date"),
+            "name": form.get("name"),
+            "skillsSelected": form.get("skills"),
+            "client": form.get("client"),
+            "category": form.get("category"),
+            "github": form.get("github"),
+            "site": form.get("site"),
+            "images": images,
+            "description": form.get("description")
+        }
+
+        console.log(newProject);
     }
 
     return (
@@ -129,44 +125,44 @@ const Admin = ({projects}) => {
                     </DialogTitle>
 
                     <DialogContent color="white">
-                        <DialogContentText fontSize={15} align="center" id="alert-dialog-slide-description">
-                            <form onSubmit={(e) => {submitFormAddProduct(e)}} style={{margin: "10px 0"}}>
-                                <div className="grid-spaceBetween">
-                                    <div className="col-3_md-6" data-push-left="off-9_md-0" style={{paddingBottom: "30px"}}>
-                                        <InputDate name="date" label="Date" />
-                                    </div>
-                                    <div className="col-3_md-6_sm-12">
-                                        <Input label="Nom du projet" required="true" name="name" />
-                                    </div>
-                                    <div className="col-3_md-6_sm-12" data-push-right="off-3_md-0">
-                                        <Input label="Nom du client" name="client" required="true" />
-                                    </div>
-                                    <div className="col-3_md-6_sm-12">
-                                        <InputSelect label="Catégorie" name="category" />
-                                    </div>
-
-                                    <div className="col-3_md-6_sm-12">
-                                        <Input label="Lien vers le github" name="github" />
-                                    </div>
-                                    <div className="col-3_md-6_sm-12" data-push-right="off-3_md-0">
-                                        <Input label="Lien vers le site" name="site" />
-                                    </div>
-                                    <div className="col-3_md-6_sm-12">
-                                        <InputSelectMultiple label="Téchnologie utilisé" name="skills" names={skills} />
-                                    </div>
-                                    <div className="col-6_sm-12">
-                                        <InputImage required="true" name="images" />
-                                    </div>
-                                    <div className="col-6_sm-12">
-                                        <InputText label="Déscription" name="description" />
-                                    </div>
+                        <form onSubmit={(e) => {submitFormAddProduct(e)}} style={{margin: "10px 0"}}>
+                            <div className="grid-spaceBetween">
+                                <div className="col-3_md-6" data-push-left="off-9_md-0" style={{paddingBottom: "30px"}}>
+                                    <InputDate name="date" label="Date" />
+                                </div>
+                                <div className="col-3_md-6_sm-12">
+                                    <Input label="Nom du projet" required={true} name="name" />
+                                </div>
+                                <div className="col-3_md-6_sm-12" data-push-right="off-3_md-0">
+                                    <Input label="Nom du client" name="client" required={true} />
+                                </div>
+                                <div className="col-3_md-6_sm-12">
+                                    <InputSelect label="Catégorie" name="category" />
                                 </div>
 
-                                <Button variant="outlined" type="submit" color="primary">
-                                    Ajouter
-                                </Button>
-                            </form>
-                        </DialogContentText>
+                                <div className="col-3_md-6_sm-12">
+                                    <Input label="Lien vers le github" name="github" />
+                                </div>
+                                <div className="col-3_md-6_sm-12" data-push-right="off-3_md-0">
+                                    <Input label="Lien vers le site" name="site" />
+                                </div>
+                                <div className="col-3_md-6_sm-12">
+                                    <InputSelectMultiple label="Téchnologie utilisé" name="skills" names={skills} />
+                                </div>
+                                <div className="col-6_sm-12">
+                                    <InputImage required={true} name="images" />
+                                </div>
+                                <div className="col-6_sm-12">
+                                    <InputText label="Déscription" name="description" />
+                                </div>
+                            </div>
+
+                            <Button variant="outlined" type="submit" color="primary">
+                                Ajouter
+                            </Button>
+                        </form>
+
+
                     </DialogContent>
                     
                     <DialogActions>
