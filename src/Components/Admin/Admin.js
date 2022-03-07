@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, Slide, SvgIcon } from "@mui/material";
 import { forwardRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import addProjectDB from "../../services/add-project.service";
 import Input from "../Form/Input";
 import InputDate from "../Form/InputDate";
 import InputImage from "../Form/InputImage";
@@ -17,13 +18,14 @@ const TransitionAdd = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Admin = ({projects}) => {
+const Admin = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const [openAdd, setOpenAdd] = useState(false);
-    const { images } = useSelector(state => {
+    const { images, projects } = useSelector(state => {
         return {
             images: state.imagesUploadedReducer.images,
+            projects: state.projectsReducer.projects,
         }
     })
     const skills = ["PHP", "SQL", "HTML", "CSS"]
@@ -47,19 +49,22 @@ const Admin = ({projects}) => {
         e.preventDefault();
         const form = new FormData(e.target);
 
+        const id = (projects.length > 0) ? projects.length : 0;
         const newProject = {
             "date": form.get("date"),
             "name": form.get("name"),
-            "skillsSelected": form.get("skills"),
+            "skills": form.get("skills"),
             "client": form.get("client"),
             "category": form.get("category"),
             "github": form.get("github"),
             "site": form.get("site"),
             "images": images,
-            "description": form.get("description")
+            "description": form.get("description"),
+            "isActive": true
         }
 
-        console.log(newProject);
+        dispatch(addProjectDB(newProject, id));
+        handleCloseAdd();
     }
 
     return (
@@ -157,9 +162,11 @@ const Admin = ({projects}) => {
                                 </div>
                             </div>
 
-                            <Button variant="outlined" type="submit" color="primary">
-                                Ajouter
-                            </Button>
+                            <div className="grid-cener">
+                                <Button variant="outlined" type="submit" color="primary" style={{margin: "auto"}}>
+                                    Ajouter
+                                </Button>
+                            </div>
                         </form>
 
 

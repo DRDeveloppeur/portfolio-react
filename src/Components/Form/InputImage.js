@@ -73,7 +73,11 @@ const InputImage = ({name,  required = false}) => {
                         </ImageList>
                     </Box>
 
-                    <button type="button" className="remove-all btn" onClick={onImageRemoveAll}>Remove all images</button>
+                    <div className="grid-center">
+                        <div className="col-6_md-12">
+                            <button type="button" style={{margin: "auto"}} className="remove-all btn" onClick={onImageRemoveAll}>Remove all images</button>
+                        </div>
+                    </div>
                 </div>
                 )}
             </ImageUploading>

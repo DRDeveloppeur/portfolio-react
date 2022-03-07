@@ -7,14 +7,18 @@ let stateInit = {
 }
 
 const projectsReducer = (state = stateInit, action = {}) => {
-    const {id, title} = action;
     let projects = [];
 
     switch (action.type) {
         case ActionsType.ADD_NEW_PROJECT:
-            projects = [...state.projects, action.payload];
+            projects = [...state.projects, action.project];
             // return {...state.projects, projects: projects};
             return {...state, projects: projects};
+        case ActionsType.GET_PROJECTS:
+            projects = action.projects.map((toDo) => {
+                return {...toDo};
+            })
+            return { projects };
         // case ActionsType.DELETE_TODO:
         //     projects = state.projects.filter((toDo) => toDo.id !== id);
         //     return {...state, projects: projects};

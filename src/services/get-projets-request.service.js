@@ -1,15 +1,18 @@
-// import { loading, loadTodo } from "../Action/actions";
-// import postRequest from "./post-request.service";
+import { child, get, getDatabase, ref } from "firebase/database";
+import { getProjects, loading } from "../Action/actions";
+import app from './firebase-init.service';
 
-// const getProjectsData = async (data = { user_id: "" }) => await postRequest('/todo/read', data);
-// const getProjects = (data) => {
-//     const getProjectsThunk = async (dispatch, getState) => {
-//         dispatch(loading(true));
-//         let response = await getProjectsData(data);
-//         dispatch(loadTodo(response.todos));
-//         dispatch(loading(false));
-//     }
+const dbRef = ref(getDatabase(app));
 
-//     return getProjectsThunk;
-// }
-// export default getProjects;
+const getProjectsRequest = async () => await get(child(dbRef, "projects/")).then(data => data.val());
+
+const getProjectsDB = () => {
+    const getProjectsThunk = async (dispatch, getState) => {
+        dispatch(loading(true));
+        let result = await getProjectsRequest();
+        dispatch(getProjects(result));
+        dispatch(loading(false));
+    }
+    return getProjectsThunk;
+}
+export default getProjectsDB;

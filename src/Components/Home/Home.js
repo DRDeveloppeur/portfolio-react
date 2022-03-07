@@ -4,7 +4,7 @@ import Projet from "../Projet/Projet";
 import PresentMe from "./PresentMe";
 import "./style.css";
 
-const Home = ({projects}) => {
+const Home = () => {
     return (
         <div className="home">
             <PresentMe id="presentMe"/>
@@ -14,7 +14,7 @@ const Home = ({projects}) => {
             {
                 localStorage.user ? (JSON.parse(localStorage.user).email === "raul3wa@gmail.com") ? <Admin /> : <Auth /> : <Auth />
             }
-            <Projet projects={projects} />
+            <Projet />
         </div>
     );
 }
