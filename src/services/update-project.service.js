@@ -1,18 +1,16 @@
-import { child, getDatabase, ref, set } from "firebase/database";
-import { addNewProject, loading } from "../Action/actions";
+import { child, getDatabase, ref, set, update } from "firebase/database";
+import { loading, updateProject } from "../Action/actions";
 import app from './firebase-init.service';
 
 const dbRef = ref(getDatabase(app));
 
-const addProjectRequest = async (project, id) => await set(child(dbRef, "projects/"+id), project);
+const updateProjectRequest = async (project, id) => await update(child(dbRef, "projects/"+id), project);
 const updateImagesRequest = async (id, index, name, result) => await set(child(dbRef, "projects/"+id+"/images/"+index+"/file/"+name), result);
 
-
-
-const addProjectDB = (project, id) => {
-    const addProjectThunk = async (dispatch, getState) => {
+const updateProjectDB = (project, id) => {
+    const updateProjectThunk = async (dispatch, getState) => {
         dispatch(loading(true));
-        await addProjectRequest(project, id);
+        await updateProjectRequest(project, id);
         project.images.forEach((image, index) => {
             for(var name in image.file) {
                 if (typeof(image.file[name]) === "string" || typeof(image.file[name]) === "number") {
@@ -20,9 +18,9 @@ const addProjectDB = (project, id) => {
                 }
             }
         });
-        dispatch(addNewProject(project));
+        dispatch(updateProject(project, id));
         dispatch(loading(false));
     }
-    return addProjectThunk;
+    return updateProjectThunk;
 }
-export default addProjectDB;
+export default updateProjectDB;

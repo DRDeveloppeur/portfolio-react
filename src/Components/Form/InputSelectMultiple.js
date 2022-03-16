@@ -1,6 +1,6 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { useTheme } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
 
 const ITEM_HEIGHT = 48;
@@ -23,7 +23,7 @@ function getStyles(name, personName, theme) {
     };
 }
 
-const InputSelectMultiple = ({names = [], name, label, required = false}) => {
+const InputSelectMultiple = ({lastValue = false, names = [], name, label, required = false}) => {
     const [value, setValue] = useState([]);
     const theme = useTheme();
     
@@ -31,6 +31,11 @@ const InputSelectMultiple = ({names = [], name, label, required = false}) => {
         const { target: { value: val } } = event;
         setValue(typeof val === 'string' ? val.split(', ') : val);
     };
+    
+    useEffect(() => {
+        setValue([]);
+        lastValue && setValue(typeof lastValue === 'string' ? lastValue.split(',') : lastValue);
+    }, [lastValue])
 
     return (
         <FormControl sx={{ maxWidth: 250, m: 1, mt: 3 }} style={{width: "100%"}} variant="standard">
@@ -39,7 +44,7 @@ const InputSelectMultiple = ({names = [], name, label, required = false}) => {
 
                 {names.map((name, key) => (
                     <MenuItem key={key} value={name} style={getStyles(name, value, theme)}>
-                    {name}
+                        {name}
                     </MenuItem>
                 ))}
             </Select>

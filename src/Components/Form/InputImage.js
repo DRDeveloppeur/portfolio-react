@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ImageList, ImageListItem, ImageListItemBar, ListSubheader } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ImageUploading from "react-images-uploading";
 import { useDispatch, useSelector } from "react-redux";
 import { imagesUploaded } from "../../Action/actions";
 import "./style.css";
 
-const InputImage = ({name,  required = false}) => {
+const InputImage = ({lastValue = false, name,  required = false}) => {
     const [images, setImages] = useState([]);
     const maxNumber = 69;
     const dispatch = useDispatch();
@@ -16,6 +16,11 @@ const InputImage = ({name,  required = false}) => {
             imagesUpload: state.imagesUploadedReducer.images,
         }
     })
+    
+    useEffect(() => {
+        setImages([]);
+        lastValue && setImages(lastValue);
+    }, [lastValue])
 
     const onChange = (imageList, addUpdateIndex) => {
         // data for submit
@@ -62,9 +67,9 @@ const InputImage = ({name,  required = false}) => {
                                 <ImageListItem key={index} className="item-card" variant="masonry">
                                     <FontAwesomeIcon icon="fas fa-times" className="remove" onClick={() => onImageRemove(index)} />
 
-                                    <img src={image.data_url} srcSet={image.data_url} alt={image.file.name} loading="lazy" />
+                                    <img src={image.data_url} srcSet={image.data_url} alt={image.file.name && image.file.name} loading="lazy" />
 
-                                    <ImageListItemBar title={image.file.name} subtitle={image.file.type} actionIcon={
+                                    <ImageListItemBar title={image.file.name && image.file.name} subtitle={image.file.type && image.file.type} actionIcon={
                                             <FontAwesomeIcon icon="fas fa-exchange-alt" className="change" onClick={() => onImageUpdate(index)} />
                                         }
                                     />
@@ -75,7 +80,7 @@ const InputImage = ({name,  required = false}) => {
 
                     <div className="grid-center">
                         <div className="col-6_md-12">
-                            <button type="button" style={{margin: "auto"}} className="remove-all btn" onClick={onImageRemoveAll}>Remove all images</button>
+                            <button type="button" style={{margin: "auto"}} className="remove-all btn" onClick={onImageRemoveAll}>Tout supprimer</button>
                         </div>
                     </div>
                 </div>

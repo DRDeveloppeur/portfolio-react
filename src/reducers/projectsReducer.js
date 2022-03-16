@@ -7,18 +7,32 @@ let stateInit = {
 }
 
 const projectsReducer = (state = stateInit, action = {}) => {
-    let projects = [];
+    let newProjects = [];
 
     switch (action.type) {
         case ActionsType.ADD_NEW_PROJECT:
-            projects = [...state.projects, action.project];
-            // return {...state.projects, projects: projects};
-            return {...state, projects: projects};
+            newProjects = [...state.projects, action.project];
+            newProjects = newProjects.filter((n) => (n !== undefined && n !== false) );
+            return {...state, projects: newProjects};
+
         case ActionsType.GET_PROJECTS:
-            projects = action.projects.map((toDo) => {
-                return {...toDo};
-            })
-            return { projects };
+            if (action.projects) {
+                newProjects = action.projects;
+                // console.log(newProjects);
+                if (newProjects.length > 1) newProjects = newProjects.filter(function(n){ return (n !== undefined && n !== false) });
+                // console.log(newProjects);
+                return {...state, projects: newProjects};
+            }
+            return {...state};
+
+        case ActionsType.UPDATE_PROJECTS:
+            newProjects = state.projects.map(project => project.id === action.id ? action.project : project).filter(n => n !== undefined)
+            return {...state, projects: newProjects};
+
+        case ActionsType.DELETE_PROJECTS:
+            newProjects = state.projects.filter(project => action.id !== project.id).filter(n => n !== undefined && n !== false);
+            return {...state, projects: newProjects};
+            
         // case ActionsType.DELETE_TODO:
         //     projects = state.projects.filter((toDo) => toDo.id !== id);
         //     return {...state, projects: projects};

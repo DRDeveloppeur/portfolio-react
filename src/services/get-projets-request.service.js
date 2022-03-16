@@ -10,7 +10,7 @@ const getProjectsDB = () => {
     const getProjectsThunk = async (dispatch, getState) => {
         dispatch(loading(true));
         let result = await getProjectsRequest();
-        dispatch(getProjects(result));
+        result && dispatch(getProjects(result));
         dispatch(loading(false));
     }
     return getProjectsThunk;

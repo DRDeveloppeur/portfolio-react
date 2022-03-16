@@ -5,6 +5,8 @@ export const imagesUploaded = (data) => ({type: ActionsType.LOAD_IMAGES, images:
 export const loading = (data) => ({type: ActionsType.LOADING, payload: data});
 export const addNewProject = (data) => ({type: ActionsType.ADD_NEW_PROJECT, project: data});
 export const getProjects = (data) => ({type: ActionsType.GET_PROJECTS, projects: data});
+export const updateProject = (data, id) => ({type: ActionsType.UPDATE_PROJECTS, project: data, id});
+export const deleteProject = (id) => ({type: ActionsType.DELETE_PROJECTS, id});
 
 // export const add = (data) => ({type: ActionsType.ADD_TODO, toDo: data});
 // export const addLog = (data) => ({type: ActionsType.ADD_LOG, log: data});

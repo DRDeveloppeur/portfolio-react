@@ -1,70 +1,42 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, Slide, SvgIcon } from "@mui/material";
+import { Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogTitle, Slide } from "@mui/material";
 import { forwardRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import addProjectDB from "../../services/add-project.service";
-import Input from "../Form/Input";
-import InputDate from "../Form/InputDate";
-import InputImage from "../Form/InputImage";
-import InputSelect from "../Form/InputSelect";
-import InputSelectMultiple from "../Form/InputSelectMultiple";
-import InputText from "../Form/InputText";
+import ListProjects from "./ListProjects";
 import "./style.css";
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="right" ref={ref} {...props} />;
 });
-const TransitionAdd = forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
+const TransitionListProjects = forwardRef(function Transition(props, ref) {
+    return <Slide direction="left" ref={ref} {...props} />;
 });
 
 const Admin = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
-    const [openAdd, setOpenAdd] = useState(false);
+    const [openListProjects, setOpenListProjects] = useState(false);
     const { images, projects } = useSelector(state => {
         return {
             images: state.imagesUploadedReducer.images,
             projects: state.projectsReducer.projects,
         }
     })
-    const skills = ["PHP", "SQL", "HTML", "CSS"]
     const handleClickOpen = () => {
         setOpen(true);
     };
-    const handleClickOpenAdd = () => {
-        setOpenAdd(true);
+    const handleClickOpenListProjects = () => {
+        setOpenListProjects(true);
     };
     const handleClose = () => {
         setOpen(false);
     };
-    const handleCloseAdd = () => {
-        setOpenAdd(false);
+    const handleCloseListProjects = () => {
+        setOpenListProjects(false);
     };
     const logout = () => {
         localStorage.clear();
         window.location.href = "/";
-    }
-    const submitFormAddProduct = (e) => {
-        e.preventDefault();
-        const form = new FormData(e.target);
-
-        const id = (projects.length > 0) ? projects.length : 0;
-        const newProject = {
-            "date": form.get("date"),
-            "name": form.get("name"),
-            "skills": form.get("skills"),
-            "client": form.get("client"),
-            "category": form.get("category"),
-            "github": form.get("github"),
-            "site": form.get("site"),
-            "images": images,
-            "description": form.get("description"),
-            "isActive": true
-        }
-
-        dispatch(addProjectDB(newProject, id));
-        handleCloseAdd();
     }
 
     return (
@@ -76,34 +48,27 @@ const Admin = () => {
             </div>
 
             <div className="container">
-                <Dialog
-                    open={open}
-                    TransitionComponent={Transition}
-                    keepMounted
-                    onClose={handleClose}
+                <Dialog open={open} TransitionComponent={Transition} keepMounted onClose={handleClose}
                     PaperProps={{
                         style: {
                           backgroundColor: "#212428",
                           color: "#fff"
                         },
-                    }}
-                    aria-describedby="alert-dialog-slide-description"
-                >
+                    }} aria-describedby="alert-dialog-slide-description" >
                     <DialogTitle fontSize={22} style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                         Bonjour { JSON.parse(localStorage.user).displayName }
+
                         <Button style={{padding: '5px', width: "fit-content"}} onClick={logout} variant='text' color='error' title="Déconnexion">
                             <FontAwesomeIcon icon="fas fa-power-off" />
                         </Button>
                     </DialogTitle>
 
                     <DialogContent>
-                        <DialogContentText fontSize={15} color="red" align="center" id="alert-dialog-slide-description">
-
-                            <Button variant="outlined" onClick={handleClickOpenAdd} color="primary">
-                                <FontAwesomeIcon icon="fas fa-plus" style={{marginRight: "15px"}} />
-                                Ajouter un projet    
-                            </Button>                                
-                        </DialogContentText>
+                        <ButtonGroup variant="outlined" aria-label="outlined primary button group">
+                            <Button onClick={handleClickOpenListProjects}>
+                                Liste des produits
+                            </Button>
+                        </ButtonGroup>
                     </DialogContent>
                     
                     <DialogActions>
@@ -111,69 +76,17 @@ const Admin = () => {
                     </DialogActions>
                 </Dialog>
 
-                <Dialog
-                    open={openAdd}
-                    TransitionComponent={TransitionAdd}
-                    keepMounted
-                    maxWidth="xl"
-                    onClose={handleCloseAdd}
-                    PaperProps={{
-                        style: {
-                          backgroundColor: "#212428",
-                          color: "#fff"
-                        },
-                    }}
-                    aria-describedby="alert-dialog-slide-description"
-                >
-                    <DialogTitle fontSize={22} style={{margin: "auto",display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-                        Ajouter un projet
+                <Dialog open={openListProjects} fullWidth={true} maxWidth="xl" TransitionComponent={TransitionListProjects} keepMounted onClose={handleCloseListProjects} PaperProps={ { style: { backgroundColor: "#212428", color: "#fff" }, }} aria-describedby="alert-dialog-slide-description" >
+                    <DialogTitle fontSize={22} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        Projets
                     </DialogTitle>
 
-                    <DialogContent color="white">
-                        <form onSubmit={(e) => {submitFormAddProduct(e)}} style={{margin: "10px 0"}}>
-                            <div className="grid-spaceBetween">
-                                <div className="col-3_md-6" data-push-left="off-9_md-0" style={{paddingBottom: "30px"}}>
-                                    <InputDate name="date" label="Date" />
-                                </div>
-                                <div className="col-3_md-6_sm-12">
-                                    <Input label="Nom du projet" required={true} name="name" />
-                                </div>
-                                <div className="col-3_md-6_sm-12" data-push-right="off-3_md-0">
-                                    <Input label="Nom du client" name="client" required={true} />
-                                </div>
-                                <div className="col-3_md-6_sm-12">
-                                    <InputSelect label="Catégorie" name="category" />
-                                </div>
-
-                                <div className="col-3_md-6_sm-12">
-                                    <Input label="Lien vers le github" name="github" />
-                                </div>
-                                <div className="col-3_md-6_sm-12" data-push-right="off-3_md-0">
-                                    <Input label="Lien vers le site" name="site" />
-                                </div>
-                                <div className="col-3_md-6_sm-12">
-                                    <InputSelectMultiple label="Téchnologie utilisé" name="skills" names={skills} />
-                                </div>
-                                <div className="col-6_sm-12">
-                                    <InputImage required={true} name="images" />
-                                </div>
-                                <div className="col-6_sm-12">
-                                    <InputText label="Déscription" name="description" />
-                                </div>
-                            </div>
-
-                            <div className="grid-cener">
-                                <Button variant="outlined" type="submit" color="primary" style={{margin: "auto"}}>
-                                    Ajouter
-                                </Button>
-                            </div>
-                        </form>
-
-
+                    <DialogContent>
+                        <ListProjects />
                     </DialogContent>
                     
                     <DialogActions>
-                        <Button variant="outlined" onClick={handleCloseAdd} color="error">Close</Button>
+                        <Button variant="outlined" onClick={handleCloseListProjects} color="error">Close</Button>
                     </DialogActions>
                 </Dialog>
             </div>

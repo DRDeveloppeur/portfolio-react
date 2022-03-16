@@ -1,12 +1,18 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
 
-const InputSelect = ({name, label, required = false}) => {
+const InputSelect = ({lastValue = false, name, label, required = false}) => {
     const [value, setValue] = useState('');
     const handleChange = (e) => {
         setValue(e.target.value);
     };
+    
+    
+    useEffect(() => {
+        setValue('');
+        lastValue && setValue(lastValue);
+    }, [lastValue])
 
     return (
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120, maxWidth: 250 }} style={{width: "100%"}}>

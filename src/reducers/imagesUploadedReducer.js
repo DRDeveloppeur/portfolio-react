@@ -1,7 +1,7 @@
 import ActionsType from "../Action/action.enum";
 
 let stateInit = {
-    images: ""
+    images: []
 }
 
 const imagesUploadedReducer = (state = stateInit, action = {}) => {

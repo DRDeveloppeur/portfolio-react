@@ -1,12 +1,17 @@
-import { Box, FormControl, TextField } from "@mui/material";
-import { useState } from "react";
+import { Box, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
 import "./style.css";
 
-const InputText = ({name, label, required = false}) => {
+const InputText = ({lastValue = false, name, label, required = false}) => {
     const [value, setValue] = useState('');
     const handleChange = (e) => {
         setValue(e.target.value);
     };
+    
+    useEffect(() => {
+        setValue('');
+        lastValue && setValue(lastValue);
+    }, [lastValue])
 
     return (
         <Box component="div" sx={{ '& .MuiTextField-root': { m: 1, width: '80%' }, }} noValidate autoComplete="off">
